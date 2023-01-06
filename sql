@@ -24,22 +24,19 @@ desc pet;
 drop table pet;
 show tables;
 
+-- insert: DML(C)
+insert 
+into pet 
+values('성탄이','이브', 'dog', 'f', '2007-12-25',null);
+
+-- select: DML(R)
 select * from pet;
-
--- insert : DML(c)
-insert into pet values('성탄이','hyun','dog','N',"2023-03-03",null);
-
--- delete : DML(D)
-delete from pet where name='이름';
 
 -- update: DML(U)
-update pet set name='이름' where name = '성탄이';
+update pet set name = '성타니' where name = '성탄이';
 
--- select : DML(R)
-select * from pet;
+-- delete: DML(D)
+delete from pet where name = '성타니';
 
 -- load data
 load data local infile 'd:\pet.txt' into table pet;
-
--- select
-select name, species from pet where name = 'bowser';
