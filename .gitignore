@@ -5,7 +5,6 @@
 **/out/
 
 ##eclipse
-**/.metadata
 **/.settings
 **/.classpath
 **/.project
