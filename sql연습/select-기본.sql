@@ -91,9 +91,9 @@ order by salary desc;
           hire_date as '입사일'
      from employees
      where gender like 'm'
-order by hire_date asc;
+order by 입사일 asc;
 
--- 예제4: 직원들의 사번, 월급을 사번(asc), 월급은 역순(desc)
+-- 예제4: 직원들의 사번, 월급을 사번(asc), 월급은(desc)
   select emp_no, salary, from_date, to_date
     from salaries
 order by emp_no asc, salary desc;
