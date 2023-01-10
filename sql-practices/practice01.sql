@@ -25,6 +25,10 @@ select count(gender)
 select count(gender)
 	from employees
  where gender = 'm'; 
+ 
+ select if(gender = 'm', '남자','여자') as '성별', count(*) as '수'
+	from employees
+group by gender;
 
 -- 문제4. 현재(to_date = '9999-01-01')
 -- 현재 근무하고 있는 직원 수는 몇 명입니까? (salaries 테이블을 사용합니다.)
@@ -70,8 +74,7 @@ select distinct title
 -- 현재 Engineer 직책의 사원은 총 몇 명입니까?
 select count(title)
 	from titles
-    where title = 'Engineer'
-  order by title;
+    where title = 'Engineer';
 
 
 -- 문제11. 
