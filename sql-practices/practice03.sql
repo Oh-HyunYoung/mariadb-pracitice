@@ -2,7 +2,7 @@
 
 -- 문제1.
 -- 현재 급여가 많은 직원부터 직원의 사번, 이름, 그리고 연봉을 출력 하시오.
-select a.emp_no, b.first_name, a.salary
+select a.emp_no, concat(b.first_name, ' ', b.last_name), a.salary
    from salaries a, employees b
  where a.emp_no = b.emp_no
 	and a.to_date = '9999-01-01'
@@ -11,7 +11,7 @@ order by a.salary desc;
 
 -- 문제2.
 -- 전체 사원의 사번, 이름, 현재 직책을 이름 순서로 출력하세요.
-select a.emp_no, a.first_name, c.title
+select a.emp_no, concat(a.first_name, ' ', a.last_name), c.title
 	from employees a, departments b , titles c
   where a.emp_no = c.emp_no
    and c.to_date = '9999-01-01'
@@ -21,15 +21,14 @@ select a.emp_no, a.first_name, c.title
 
 -- 문제3.
 -- 전체 사원의 사번, 이름, 현재 부서를 이름 순서로 출력하세요.
-select a.emp_no, a.first_name, b.dept_name
+select a.emp_no, concat(a.first_name, ' ', a.last_name), b.dept_name
 	from employees a, departments b , dept_emp c
   where a.emp_no = c.emp_no 
    and b.dept_no = c.dept_no
    and c.to_date = '9999-01-01'
-   group by first_name
   order by a.first_name asc;
 
--- 문제4. //////
+-- 문제4.
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.
 select a.emp_no, a.first_name, e.salary, c.title, b.dept_name
 	from employees a, departments b , titles c, dept_emp d, salaries e
@@ -38,6 +37,8 @@ select a.emp_no, a.first_name, e.salary, c.title, b.dept_name
 	and a.emp_no = e.emp_no
     and b.dept_no = d.dept_no
 	and c.to_date = '9999-01-01'
+    and d.to_date = '9999-01-01'
+    and e.to_date = '9999-01-01'
   order by a.first_name asc;
 
 
@@ -56,7 +57,6 @@ select a.first_name, b.dept_name, c.title
    from employees a, departments b, titles c
    where a.emp_no = c.emp_no 
 	  and a.first_name like binary 'S%';
-
 
 -- 문제7.
 -- 현재, 직책이 Engineer인 사원 중에서 현재 급여가 40000 이상인 사원을 급여가 큰 순서대로 출력하세요.
