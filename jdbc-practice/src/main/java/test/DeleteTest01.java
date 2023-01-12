@@ -8,8 +8,8 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 public class DeleteTest01 {
 
-	public static void main(String[] args){
-		boolean result = delete(5L);
+	public static void main(String[] args) {
+		boolean result = delete(6L);
 		System.out.println(result ? "성공" : "실패");
 	}
 
@@ -30,15 +30,18 @@ public class DeleteTest01 {
 			String sql =
 					"delete" + 
 					"  from dept" + 
-					" where no = " + no;
+					" where no = ?";
 			pstmt = conn.prepareStatement(sql);
 			
-			//4. SQL 실행
+			//4. binding
+			pstmt.setLong(1, no);
+			
+			//5. SQL 실행
 			int count = pstmt.executeUpdate();
 			
-			//5. 결과처리
+			//6. 결과처리
 			result = count == 1;
-			
+
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		} catch (SQLException e) {
@@ -57,7 +60,7 @@ public class DeleteTest01 {
 			}
 		}
 		
-		return result;	
+		return result;		
 	}
 
 }
