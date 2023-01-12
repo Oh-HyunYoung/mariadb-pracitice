@@ -11,6 +11,13 @@ import java.util.List;
 import hr.vo.EmployeeVo;
 
 public class EmployeeDao {
+	public List<EmployeeVo> findBySalary(int minSsalary, int maxsalary) {
+		List<EmployeeVo> result = new ArrayList<>();
+		
+		return result;
+	}
+	
+	
 	public List<EmployeeVo> findByName(String keyword) {
 		List<EmployeeVo> result = new ArrayList<>();
 		
@@ -25,10 +32,11 @@ public class EmployeeDao {
 			conn = DriverManager.getConnection(url, "hr", "hr");
 			
 			String sql = 
-					"select emp_no, first_name, last_name, date_format(hire_date, '%Y-%m-%d')" + 
-					"  from employees" +
-					" where first_name like ?" + 
-					"    or last_name like ?";
+					"  select emp_no, first_name, last_name, date_format(hire_date, '%Y-%m-%d')" + 
+					"    from employees" +
+					"  where first_name like ?" + 
+					"    or last_name like ?" +
+					"  order by hire_date asc";
 			
 			pstmt = conn.prepareStatement(sql);
 
