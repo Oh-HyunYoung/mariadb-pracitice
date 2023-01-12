@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class DeleteTest01 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		boolean result = delete(5L);
 		System.out.println(result ? "성공" : "실패");
 	}
