@@ -18,5 +18,13 @@ public class EmployeeDaoTest {
 			System.out.println(vo);
 		}
 	}
+	
+	private static void testFindByName(String keyword) {
+		List<EmployeeVo> list = new EmployeeDao().findByName(keyword);
+		for(EmployeeVo vo : list) {
+			System.out.println(vo);
+		}
+		
+	}
 
 }
