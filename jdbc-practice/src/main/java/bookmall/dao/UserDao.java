@@ -1,4 +1,4 @@
-package bookshop.dao;
+package bookmall.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,31 +8,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bookshop.vo.AuthorVo;
+import bookmall.vo.UserVo;
+import bookshop.vo.BookVo;
 
-public class AuthorDao {
+public class UserDao {
+	public List<UserVo> findAll() {
+		List<UserVo> result = new ArrayList<UserVo>();
 
-	public List<AuthorVo> findAll() {
-		List<AuthorVo> result = new ArrayList<AuthorVo>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-
 		try {
 			conn = getConnection();
 
-			String sql = "select no, name from author";
+			String sql = "select no,name,num,email,password from user";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
-				AuthorVo vo = new AuthorVo();
-				vo.setNo(rs.getLong(1));
+				UserVo vo = new UserVo();
+				vo.setNo(rs.getInt(1));
 				vo.setName(rs.getString(2));
-				
+				vo.setNum(rs.getString(3));
+				vo.setEmail(rs.getString(4));
+				vo.setPassword(rs.getString(5));
+
 				result.add(vo);
-				
+
 			}
 
 		} catch (SQLException e) {
@@ -57,21 +60,24 @@ public class AuthorDao {
 		}
 
 		return result;
-}
+	}
 
-	public void insert(AuthorVo vo) {
+	public void insert(UserVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			conn = getConnection();
 
-			String sql = "insert into author values(null, ?)";
+			String sql = "insert into user(no,name,num,email,password) values(null,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 
-	
+//			pstmt.setInt(1, vo.getNo());
 			pstmt.setString(1, vo.getName());
-
+			pstmt.setString(2, vo.getNum());
+			pstmt.setString(3, vo.getEmail());
+			pstmt.setString(4, vo.getPassword());
+				
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -96,8 +102,8 @@ public class AuthorDao {
 
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.10.101:3307/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
+			String url = "jdbc:mariadb://192.168.10.101:3307/bookmall?charset=utf8";
+			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		}
@@ -105,4 +111,4 @@ public class AuthorDao {
 		return conn;
 	}
 
-}	
+}

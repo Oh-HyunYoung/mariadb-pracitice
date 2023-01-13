@@ -1,4 +1,4 @@
-package bookshop.dao;
+package bookmall.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,12 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import bookshop.vo.AuthorVo;
+import bookmall.vo.Order_bookVo;
 
-public class AuthorDao {
 
-	public List<AuthorVo> findAll() {
-		List<AuthorVo> result = new ArrayList<AuthorVo>();
+public class Order_bookDao {
+
+	public List<Order_bookVo> findAll() {
+		List<Order_bookVo> result = new ArrayList<Order_bookVo>();
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -22,17 +24,19 @@ public class AuthorDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select no, name from author";
+			String sql = "select * from order_book";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				AuthorVo vo = new AuthorVo();
-				vo.setNo(rs.getLong(1));
-				vo.setName(rs.getString(2));
+				Order_bookVo vo = new Order_bookVo();
+				vo.setBook_no(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setBook_count(rs.getInt(3));
+				vo.setBook_no(rs.getInt(4));
+				vo.setOrders_no(rs.getInt(5));
 				
 				result.add(vo);
-				
 			}
 
 		} catch (SQLException e) {
@@ -55,24 +59,27 @@ public class AuthorDao {
 			}
 
 		}
-
+		
 		return result;
 }
 
-	public void insert(AuthorVo vo) {
+	public void insert(Order_bookVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			conn = getConnection();
 
-			String sql = "insert into author values(null, ?)";
+			String sql = "insert into order_book values(null,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 
-	
-			pstmt.setString(1, vo.getName());
-
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setInt(2, vo.getBook_count());
+			pstmt.setInt(3, vo.getBook_no());
+			pstmt.setInt(4, vo.getOrders_no());
+			
 			pstmt.executeUpdate();
+			
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -90,19 +97,21 @@ public class AuthorDao {
 			}
 		}
 	}
-
+	
+	
+	
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.10.101:3307/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
+			String url = "jdbc:mariadb://192.168.10.101:3307/bookmall?charset=utf8";
+			conn = DriverManager.getConnection(url, "bookmall", "bookmall");
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		}
 
 		return conn;
 	}
-
-}	
+	
+}

@@ -106,10 +106,8 @@ public class BookDao {
 					" where no=?";
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setLong(2, vo.getNo());
-			//pstmt.setString(2, vo.getTitle());
 			pstmt.setString(1, vo.getRent());
-			//pstmt.setLong(4, vo.getAuthorNo());
+			pstmt.setLong(2, vo.getNo());
 			
 			pstmt.executeUpdate();
 
