@@ -20,7 +20,7 @@ public class CartDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select no, title, book_count, book_no, user_no from cart";
+			String sql = "select c.no, b.title, b.price, c.book_count from cart c, book b where c.no = b.no";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -28,9 +28,8 @@ public class CartDao {
 				CartVo vo = new CartVo();
 				vo.setNo(rs.getInt(1));
 				vo.setTitle(rs.getString(2));
-				vo.setBook_count(rs.getInt(3));
-				vo.setBook_no(rs.getInt(4));
-				vo.setUser_no(rs.getInt(5));
+				vo.setPrice(rs.getInt(3));
+				vo.setBook_count(rs.getInt(4));
 
 				result.add(vo);
 			}
@@ -91,39 +90,6 @@ public class CartDao {
 			}
 		}
 	}
-	
-	public void update(CartVo vo) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			conn = getConnection();
-
-			String sql = "update cart set book_count=?";
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setLong(1, vo.getBook_count());
-			
-			pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	
 
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;

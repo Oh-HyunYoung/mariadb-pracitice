@@ -38,8 +38,8 @@ public class Order_bookVo {
 	}
 	@Override
 	public String toString() {
-		return "Order_bookVo [no=" + no + ", title=" + title + ", book_count=" + book_count + ", book_no=" + book_no
-				+ ", orders_no=" + orders_no + "]";
+		return "Order_bookVo [no= " + no + ", book_no=" + book_no + ", title=" + title + ", book_count=" + book_count 
+				+  "]";
 	}
 
 }

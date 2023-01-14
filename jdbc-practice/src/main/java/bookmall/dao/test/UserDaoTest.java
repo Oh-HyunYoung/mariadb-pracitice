@@ -7,7 +7,7 @@ import bookmall.vo.UserVo;
 
 public class UserDaoTest {
 	public static void main(String[] args) {
-		//testInsert();
+		testInsert();
 		testFindAll();
 	}
 

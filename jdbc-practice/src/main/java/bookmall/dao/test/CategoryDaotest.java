@@ -6,7 +6,6 @@ import java.util.List;
 import bookmall.dao.CategoryDao;
 import bookmall.vo.CategoryVo;
 
-
 public class CategoryDaotest {
 	public static void main(String[] args) {
 		testInsert();
@@ -19,14 +18,17 @@ public class CategoryDaotest {
 		
 		vo = new CategoryVo();
 		vo.setCate("자기계발");
+		vo.setBook_no(1);
 		dao.insert(vo);
 		
 		vo = new CategoryVo();
 		vo.setCate("금융");
+		vo.setBook_no(2);
 		dao.insert(vo);
 		
 		vo = new CategoryVo();
 		vo.setCate("문학");
+		vo.setBook_no(3);
 		dao.insert(vo);
 			
 	}

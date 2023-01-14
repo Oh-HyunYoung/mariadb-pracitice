@@ -7,7 +7,6 @@ import bookmall.vo.Order_bookVo;
 
 
 public class Order_bookDaoTest {
-
 	public static void main(String[] args) {
 		testInsert();
 		testFindAll();
@@ -19,17 +18,17 @@ public class Order_bookDaoTest {
 
 		vo = new Order_bookVo();
 		vo.setTitle("인간관계론");
-		vo.setBook_count(3);
+		vo.setBook_count(1);
 		vo.setBook_no(1);
-		vo.setOrders_no(17);
+		vo.setOrders_no(1);
 
 		dao.insert(vo);
 
 		vo = new Order_bookVo();
 		vo.setTitle("레버리지");
-		vo.setBook_count(3);
+		vo.setBook_count(2);
 		vo.setBook_no(2);
-		vo.setOrders_no(18);
+		vo.setOrders_no(1);
 		
 		dao.insert(vo);
 

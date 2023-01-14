@@ -22,16 +22,17 @@ public class OrderDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select no, receive, user_no, price from orders";
+			String sql = "select o.no, u.name, u.email, o.price, o.receive from orders o, user u where o.user_no = u.no";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				OrderVo vo = new OrderVo();
 				vo.setNo(rs.getInt(1));
-				vo.setReceive(rs.getString(2));
-				vo.setUser_no(rs.getInt(3));
+				vo.setName(rs.getString(2));
+				vo.setEmail(rs.getString(3));
 				vo.setPrice(rs.getInt(4));
+				vo.setReceive(rs.getString(5));
 
 				result.add(vo);
 			}
@@ -54,6 +55,7 @@ public class OrderDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
 		}
 
 		return result;

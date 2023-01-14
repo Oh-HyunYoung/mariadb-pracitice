@@ -30,6 +30,8 @@ select no, title, price from book b order by no desc;
 insert into book(no, title, price) values(null, ?, ?);
 select no, title, price, category_no from book;
 
+select * from category c, book b;
+
 -- user
 select no,name,num,email,password,orders_no from user;
 select no,name,num,email,password,orders_no from user;
@@ -41,6 +43,7 @@ select * from category;
 select c.title, c.cate from category c;
 delete from category;
 insert into category(title,cate) values(?,?);
+select  c.no, b.title, c.cate from category c, book b where b.no = c.book_no;
 
 -- cart
 select no,title,book_count,book_no,user_no from cart;
@@ -51,12 +54,25 @@ update cart set book_count=?;
 -- orders
 select order_no, concat(u.name, '/' , u.email) as info ,b.price,  o.receive from orders o, order_book ob, book b, user u where o.order_no = ob.orders_order_no order by order_no desc;
 select o.no, o.receive, o.user_no, ob.no, ob.title, ob.book_count, ob.book_no, ob.orders_no from order_book ob, orders o where o.no = ob.no;
-select no, receive, user_no,price from orders
+select no, receive, user_no,price from orders;
+insert into orders(no, receive,user_no,price) values(null,?,?,?);
+select o.no, u.name, u.email, o.receive from orders o, user u;
 
+select o.no, u.name, u.email, o.price, o.receive from orders o, user u where o.user_no = u.no ;
+-- order_book
+-- select ob.no, ob.title, ob.book_count, from order_book ob, orders o;
+select * from order_book;
+insert into order_book values(null,?,?,?,?);
+
+select o.no, u.name, u.email, o.price, o.receive from orders o, user u;
+select c.no, b.title, b.price, c.book_count from cart c, book b;
+select no, book_no, title, book_count from order_book;
+--
 select * from cart;
 select * from book;
 select * from user;
 select * from orders;
+select * from order_book;
 select * from category;
 
 -- order_book

@@ -23,7 +23,7 @@ public class BookDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select no, title, price, category_no from book";
+			String sql = "select no, title, price from book";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -32,7 +32,6 @@ public class BookDao {
 				vo.setNo(rs.getInt(1));
 				vo.setTitle(rs.getString(2));
 				vo.setPrice(rs.getInt(3));
-				vo.setCategory_no(rs.getInt(4));
 				result.add(vo);
 				
 			}
@@ -68,12 +67,11 @@ public class BookDao {
 		try {
 			conn = getConnection();
 
-			String sql = "insert into book(no, title, price, category_no) values(null,?,?,?)";
+			String sql = "insert into book(no, title, price) values(null,?,?)";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setInt(2, vo.getPrice());
-			pstmt.setInt(3, vo.getCategory_no());
 			
 			pstmt.executeUpdate();
 

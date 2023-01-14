@@ -13,24 +13,25 @@ import bookmall.vo.CategoryVo;
 public class CategoryDao {
 	public List<CategoryVo> findAll() {
 		List<CategoryVo> result = new ArrayList<CategoryVo>();
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-
 		try {
 			conn = getConnection();
 
-			String sql = "select * from category c";
+			String sql = "select c.no, b.title, c.cate, c.book_no from category c, book b where b.no = c.book_no";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				CategoryVo vo = new CategoryVo();
-				vo.setBook_no(rs.getInt(1));
-				vo.setCate(rs.getString(2));
-				
+				vo.setNo(rs.getInt(1));
+				vo.setTitle(rs.getString(2));
+				vo.setCate(rs.getString(3));
+				vo.setBook_no(rs.getInt(4));
+
 				result.add(vo);
 			}
 
@@ -54,9 +55,9 @@ public class CategoryDao {
 			}
 
 		}
-		
+
 		return result;
-}
+	}
 
 	public void insert(CategoryVo vo) {
 		Connection conn = null;
@@ -65,12 +66,13 @@ public class CategoryDao {
 		try {
 			conn = getConnection();
 
-			String sql = "insert into category values(null,?)";
+			String sql = "insert into category values(null,?,?)";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getCate());
+			pstmt.setInt(2, vo.getBook_no());
+
 			pstmt.executeUpdate();
-			
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -88,9 +90,7 @@ public class CategoryDao {
 			}
 		}
 	}
-	
-	
-	
+
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 
@@ -104,5 +104,5 @@ public class CategoryDao {
 
 		return conn;
 	}
-	
+
 }

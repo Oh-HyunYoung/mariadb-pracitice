@@ -4,15 +4,8 @@ public class BookVo {
 	private int no;
 	private String title;
 	private int price;
-	private int category_no;
 
-	public int getCategory_no() {
-		return category_no;
-	}
 
-	public void setCategory_no(int category_no) {
-		this.category_no = category_no;
-	}
 
 	public int getNo() {
 		return no;
@@ -40,7 +33,7 @@ public class BookVo {
 
 	@Override
 	public String toString() {
-		return "BookVo [no=" + no + ", title=" + title + ", price=" + price + ", category_no=" + category_no + "]";
+		return "BookVo [no=" + no + ", title=" + title + ", price=" + price + "]";
 	}
 
 }

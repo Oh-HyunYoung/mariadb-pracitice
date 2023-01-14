@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bookmall.vo.UserVo;
-import bookshop.vo.BookVo;
 
 public class UserDao {
 	public List<UserVo> findAll() {

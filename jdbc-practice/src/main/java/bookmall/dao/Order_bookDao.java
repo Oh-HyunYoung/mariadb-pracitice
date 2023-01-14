@@ -24,17 +24,17 @@ public class Order_bookDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select * from order_book";
+			String sql = "select no, book_no, title, book_count from order_book";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
 				Order_bookVo vo = new Order_bookVo();
-				vo.setBook_no(rs.getInt(1));
-				vo.setTitle(rs.getString(2));
-				vo.setBook_count(rs.getInt(3));
-				vo.setBook_no(rs.getInt(4));
-				vo.setOrders_no(rs.getInt(5));
+				vo.setNo(rs.getInt(1));
+				vo.setBook_no(rs.getInt(2));
+				vo.setTitle(rs.getString(3));
+				vo.setBook_count(rs.getInt(4));
+
 				
 				result.add(vo);
 			}

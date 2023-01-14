@@ -23,12 +23,6 @@ public class OrderDaoTest {
 		
 		dao.insert(vo);
 
-		vo = new OrderVo();
-		vo.setReceive("서울");
-		vo.setUser_no(1);
-		vo.setPrice(10000);
-		
-		dao.insert(vo);
 
 	}
 
@@ -37,6 +31,7 @@ public class OrderDaoTest {
 		for (OrderVo vo : list) {
 			System.out.println(vo);
 		}
+		
 	}
 
 }
