@@ -71,7 +71,7 @@ public class BookMall {
 		List<OrderVo> list = new OrderDao().findAll();
 		
 		for (OrderVo vo : list) {
-			String info = String.format("[%d] 주문번호: %s, 주문자(이름/이메일): (%s/%s), 결제 금액: %s, 배송지: %s",vo.getNo(), vo.getNo(), vo.getName(), vo.getEmail(), vo.getPrice(), vo.getReceive());
+			String info = String.format("[1] 주문번호: %s, 주문자(이름/이메일): (%s/%s), 결제 금액: %s, 배송지: %s", vo.getNo(), vo.getName(), vo.getEmail(), vo.getPrice(), vo.getReceive());
 			System.out.println(info);
 		}
 	}

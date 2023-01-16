@@ -22,7 +22,7 @@ public class OrderDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select o.no, u.name, u.email, o.price, o.receive from orders o, user u where o.user_no = u.no";
+			String sql = "select concat(date_format(now(),'%Y%m%d'),0,o.no), u.name, u.email, o.price, o.receive from orders o, user u where o.user_no = u.no";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
